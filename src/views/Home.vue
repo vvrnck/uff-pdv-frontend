@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    
+    <NavBar :user="getUser()" :title="menu" />
+    <v-main>
+      Look, a home screen =)
+    </v-main>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
+
+import { NavBar } from '@/components'
+import { getUser } from '../utils/utils';
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      menu: "Home",
+    }
+  },
   components: {
-    //HelloWorld
+    NavBar
+  },
+  methods: {
+    getUser(){ return getUser(); }
   }
 }
 </script>
