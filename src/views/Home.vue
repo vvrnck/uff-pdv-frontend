@@ -2,7 +2,14 @@
   <div class="home">
     <NavBar :user="getUser()" :title="menu" />
     <v-main>
-      Look, a home screen =)
+      <v-container>
+          <v-col
+              cols="12"
+              md="3"
+          >
+            Look, a home screen =)
+          </v-col>
+      </v-container>
     </v-main>
   </div>
 </template>

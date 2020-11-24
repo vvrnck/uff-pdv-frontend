@@ -23,12 +23,13 @@
                                         :counter="input.counter"
                                         :label="input.label"
                                         :required="input.required"
+                                        :type="input.type"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
                     <v-btn
-                            color="blue"
+                            color="primary"
                             @click="login()"
                             block
                     >
@@ -57,8 +58,8 @@ export default {
         return {
             valid: true,
             inputs: [
-                { label: "Email", value: "rodrigo.werneck@id.uff.br", required: true, counter: 50, rules: [ v => !!v || 'O Email é obrigatório', v => /.+@.+\..+/.test(v) || 'O email deve ser válido',]  },
-                { label: "Senha", value: "123456", required: true, counter: 15, rules: [ v => !!v || 'A Senha é obrigatória', v => (v && v.length <= 15) || 'A senha deve ter no máximo 15 caracteres',] },
+                { label: "Email", value: "rodrigo.werneck@id.uff.br", required: true, counter: 50, rules: [ v => !!v || 'O Email é obrigatório', v => /.+@.+\..+/.test(v) || 'O email deve ser válido',], type: "text"},
+                { label: "Senha", value: "vv123", required: true, counter: 15, rules: [ v => !!v || 'A Senha é obrigatória', v => (v && v.length <= 15) || 'A senha deve ter no máximo 15 caracteres',], type: "password" },
             ]
         }
     },

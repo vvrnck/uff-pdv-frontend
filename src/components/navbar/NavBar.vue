@@ -14,7 +14,7 @@
       <v-spacer></v-spacer>
 
       <div v-if="user">
-        {{ user.login }}
+        {{ user.email }}
       </div>
       <v-btn icon @click="changeTheme()">
         <v-icon>mdi-theme-light-dark</v-icon>
@@ -73,6 +73,7 @@ export default {
         itens: [
           { icon: "mdi-store", label: "Produtos" },
           { icon: "mdi-shopping", label: "Vendas" },
+          { icon: "mdi-truck", label: "Fornecedores" },
           { icon: "mdi-cash-multiple", label: "Promoções" },
           { icon: "mdi-account-multiple", label: "Usuários" }          
         ]
@@ -86,10 +87,10 @@ export default {
           clearUserSession();
         },
         changeMenu(item) {
-          if (item === "Produtos") return this.$router.push("produtos");
-          else if (item === "Vendas") return this.$router.push("vendas");
-          else if (item === "Promoções") return this.$router.push("promocoes");
-          else return this.$router.push("Usuários");
+          if (item === "Produtos") return this.$router.push("produtos").catch(err => console.log(err));
+          else if (item === "Vendas") return this.$router.push("vendas").catch(err => console.log(err));
+          else if (item === "Promoções") return this.$router.push("promocoes").catch(err => console.log(err));
+          else return this.$router.push("Usuários").catch(err => console.log(err));
         }
     }
 }

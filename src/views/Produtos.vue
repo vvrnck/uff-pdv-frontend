@@ -2,38 +2,67 @@
     <div class="produtos">
         <NavBar :user="getUser()" :title="menu" />
         <v-main>
-            <div class="produtos-items">
-                <div v-for="i in 5" :key="i">
-                    <Produto />
-                </div>
-            </div>
+             <v-container>
+                    <NovoProduto :dialog="dialog" :close="close" />
+                    <v-row>
+                        <v-btn
+                            rounded
+                            color="primary"
+                            outlined
+                            raised
+                            text
+                            elevation="2"
+                            @click="dialog = !dialog"
+                        >
+                            
+                            Adicionar
+                            <v-icon
+                                right
+                                dark
+                            >
+                                mdi-plus
+                            </v-icon>
+                        </v-btn>
+                    </v-row>
+                  <v-flex d-flex>
+                    <v-layout wrap>
+                        <v-flex md3 v-for="produto in produtos" :key="produto.id">
+                            <Produto :produto="produto" />
+                        </v-flex>
+                    </v-layout>
+                  </v-flex>
+             </v-container>
         </v-main>
     </div>
 </template>
 
 <script>
-import { NavBar, Produto } from "../components/index";
+import { NavBar, Produto, NovoProduto } from "../components/index";
 import { getUser, getApiURL } from "../utils/utils";
 import axios from "axios";
 
 export default {
     name: "Produtos",
-    components: { NavBar, Produto },
+    components: { NavBar, Produto, NovoProduto },
     data() {
         return {
             menu: "Produtos",
             produtos: [],
+            dialog: false,
         }
     },
     mounted() {
-        const url = getApiURL + 'produto/all';
+        const url = getApiURL() + 'produto/all';
         axios.get(url).then(response => {
             const { data } = response;
             this.produtos = data;
         })
     },
     methods: {
-        getUser(){ return getUser(); }
+        close() {
+            this.dialog = false;
+        },
+        getUser(){ return getUser(); },
     }
 }
 </script>
