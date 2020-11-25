@@ -87,10 +87,8 @@ export default {
           clearUserSession();
         },
         changeMenu(item) {
-          if (item === "Produtos") return this.$router.push("produtos").catch(err => console.log(err));
-          else if (item === "Vendas") return this.$router.push("vendas").catch(err => console.log(err));
-          else if (item === "Promoções") return this.$router.push("promocoes").catch(err => console.log(err));
-          else return this.$router.push("Usuários").catch(err => console.log(err));
+          if (item === "Produtos") return this.$router.push("produtos").catch(err => console.log(err));         
+          else return this.$router.push("not_found").catch(err => console.log(err));
         }
     }
 }

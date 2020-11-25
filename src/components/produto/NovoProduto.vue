@@ -33,7 +33,7 @@
                 md="4"
               >
                 <v-select
-                  :items="['Categoria 1', 'Categoria 2']"
+                  :items="categoriasItems"
                   label="Categoria*"
                   name="categoria"
                   v-model="fields.categoria"
@@ -74,7 +74,7 @@
               >
                 <v-select
                   prepend-icon="mdi-truck"
-                  :items="fornecedores"
+                  :items="fornecedoresItems"
                   label="Fornecedor*"
                   v-model="fields.fornecedor"
                   required
@@ -242,16 +242,27 @@ export default {
                 promocao: false,
                 dates: [],
                 descricao: "",
+                porcentagem: "",
             },
             fornecedores: [],
-
+            categorias: [],
+            fornecedoresItems: [],
+            categoriasItems: []
         }
     },
     mounted() {
-      const url = getApiURL() + 'fornecedor/all';
-      axios.get(url).then(response => {
+      const fornecedor_url = getApiURL() + 'fornecedor/all';
+      axios.get(fornecedor_url).then(response => {
         const { data } = response;
-        this.fornecedores = Array.from(data, f => f.razaoSocial); 
+        this.fornecedores = data;
+        this.fornecedoresItems = Array.from(data, f => f.razaoSocial); 
+      });
+
+      const categoria_url = getApiURL() + 'categoria/all';
+      axios.get(categoria_url).then(response => {
+        const { data } = response;
+        this.categorias = data;
+        this.categoriasItems = Array.from(data, c => c.codigo); 
       });
     },
     methods: {
@@ -260,18 +271,26 @@ export default {
         },
         save() {
           const url = getApiURL() + '/produto/registrar';
-          const { nome, categoria, preco, codigoBarras, fornecedor,  } = this.fields;
+          const { nome, preco, codigoBarras, urlImg, qtdEstoque, fornecedor, dates, porcentagem, categoria, descricao } = this.fields;
 
-
-          const fields = {
-            nome, 
-            categoria,
-            preco,
-            codigoBarras, 
-            fornecedor
+          const data = {
+            nome: nome,
+            codBarras: codigoBarras,
+            preco: preco,
+            qtdEstoque: qtdEstoque,
+            fornecedor: this.fornecedores.find(f => f.razaoSocial == fornecedor),
+            urlImg: urlImg,
+            promocao: {
+              dataInicial: dates[0],
+              dataFinal: dates[1],
+              porcentagem: porcentagem
+            },
+            categoria: this.categorias.find(c => c.codigo == categoria),
+            descricao: descricao,
           }
 
-          axios.post(url, fields).then(response => {
+          console.log(data)
+          axios.post(url, data).then(response => {
               console.log(response);
           })
         },

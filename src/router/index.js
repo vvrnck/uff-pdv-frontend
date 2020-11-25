@@ -28,6 +28,11 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue')
   },
+  {
+    path: '/not_found',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
+  },
 ]
 
 const router = new VueRouter({
