@@ -180,6 +180,7 @@
                   name="porcentagem"
                   type="number"
                   prepend-icon="mdi-percent"
+                  @input="(value) => change('porcentagem', value)"
                 ></v-text-field>
               </v-col>
 
@@ -218,6 +219,26 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+     <v-snackbar
+      v-model="snackbar.visible"
+      :timeout="snackbar.timeout"
+      color="primary accent-4"
+      elevation="24"
+      right
+    >
+      {{ snackbar.message }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar.visible = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -238,7 +259,7 @@ export default {
                 codigoBarras: "",
                 fornecedor: "",
                 qtdEstoque: "",
-                urlImg: "",
+                urlImg: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
                 promocao: false,
                 dates: [],
                 descricao: "",
@@ -247,7 +268,8 @@ export default {
             fornecedores: [],
             categorias: [],
             fornecedoresItems: [],
-            categoriasItems: []
+            categoriasItems: [],
+            snackbar: { visible: false, message: "", timeout: 2500 }
         }
     },
     mounted() {
@@ -268,10 +290,10 @@ export default {
     methods: {
         change(field, e) {
             this.fields[field] = e;
-        },
+        },   
         save() {
           const url = getApiURL() + '/produto/registrar';
-          const { nome, preco, codigoBarras, urlImg, qtdEstoque, fornecedor, dates, porcentagem, categoria, descricao } = this.fields;
+          const { nome, preco, codigoBarras, urlImg, qtdEstoque, promocao, fornecedor, dates, porcentagem, categoria, descricao } = this.fields;
 
           const data = {
             nome: nome,
@@ -280,18 +302,32 @@ export default {
             qtdEstoque: qtdEstoque,
             fornecedor: this.fornecedores.find(f => f.razaoSocial == fornecedor),
             urlImg: urlImg,
-            promocao: {
-              dataInicial: dates[0],
-              dataFinal: dates[1],
-              porcentagem: porcentagem
-            },
             categoria: this.categorias.find(c => c.codigo == categoria),
             descricao: descricao,
           }
 
-          console.log(data)
-          axios.post(url, data).then(response => {
+          if (promocao) {
+            data.promocao = {
+              dataInicial: dates[0],
+              dataFinal: dates[1],
+              porcentagem: porcentagem
+            }
+          }
+
+          let newData = Object.assign({}, data);
+          Object.keys(data).map(item => {
+            if (typeof(data[item]) == 'object') {
+              if (data[item].id) delete data[item].id
+              Object.keys(data[item]).map(o => {
+                if (typeof(data[item][o]) == 'object') delete data[item][o].id;
+              });
+            }
+          })
+
+          axios.post(url, newData).then(response => {
               console.log(response);
+              this.dialog = false;
+              this.snackbar = { visible: true, message: "Produto cadastrado com sucesso!", timeout: 2500 };
           })
         },
         
