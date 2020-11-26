@@ -5,10 +5,27 @@
       <v-container>
           <v-col
               cols="12"
-              md="3"
+              md="12"
           >
-            Look, a home screen =)
-          </v-col>
+          <v-card elevation="3" class="pa-10">
+            <h3>
+              Este trabalho tem como objetivo apresentar os padrões de projetos implementados, tanto como a comunicação entre o frontend 
+              e o backend para a disciplina de Projeto de Software 2020.1
+            </h3>
+          </v-card>
+          <v-spacer></v-spacer>
+          <v-card elevation="3" class="pa-10 mt-10">
+            <h3 class="mb-5">Grupo:</h3>
+            <div style="display: grid; grid-auto-flow: row;">
+              <span>Gabriel Brandão</span>
+              <span>João</span>
+              <span>Lucas Rogério</span>
+              <span>Luisa</span>
+              <span>Renan</span>
+              <span>Rodrigo Werneck</span>
+            </div>
+          </v-card>
+        </v-col>
       </v-container>
     </v-main>
   </div>
