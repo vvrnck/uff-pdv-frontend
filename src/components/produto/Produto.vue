@@ -2,18 +2,19 @@
   <v-card
     class="ma-3"
     max-width="400"
+    height="310"
   >
     <v-img
       :src="produto.urlImg"
       height="170px"
     ></v-img>
 
-    <v-card-title>
+    <v-card-title class="product-title">
       {{ produto.nome }}
     </v-card-title>
 
     <v-card-subtitle>
-      Category
+      {{ produto.categoria.nome }}
     </v-card-subtitle>
 
     <v-card-actions>
@@ -53,10 +54,15 @@
         style="height: 100%;"
       >
         <v-card-text class="pb-0">
-          <p class="display-1 text--primary">
+          <p class="display-1 text--primary product-title">
             {{ produto.nome }}
           </p>
           <p>{{ produto.descricao }} </p>
+          <div class="subtitle-2">
+            R$: {{ produto.preco }} <br>
+            Em estoque: {{ produto.qtdEstoque }} <br>
+            Cod.Barras: {{ produto.codBarras }}
+          </div>
         </v-card-text>
         <v-spacer></v-spacer>
         <v-card-actions class="pt-0">
@@ -90,5 +96,12 @@
   opacity: 1 !important;
   position: absolute;
   width: 100%;
+}
+
+.product-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
 }
 </style>

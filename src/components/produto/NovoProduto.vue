@@ -90,7 +90,7 @@
                 <v-text-field
                   prepend-icon="mdi-archive"
                   label="Quantidade em Estoque"
-                  v-model="fields.estoque"
+                  v-model="fields.qtdEstoque"
                   name="estoque"
                   @input="(value) => change('estoque', value)"
                   type="number"
@@ -253,17 +253,17 @@ export default {
         return {
             modal: false,
             fields: {
-                nome: "",
-                categoria: "",
-                preco: "",
-                codigoBarras: "",
-                fornecedor: "",
-                qtdEstoque: "",
+                nome: "Martelo Projeto SW",
+                categoria: "1D",
+                preco: "100.00",
+                codigoBarras: "1234 1234 1234 1234 1234",
+                fornecedor: "Tatu do bem",
+                qtdEstoque: 1.015,
                 urlImg: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
                 promocao: false,
                 dates: [],
-                descricao: "",
-                porcentagem: "",
+                descricao: "Uma descrição qualquer =)",
+                porcentagem: 0.15,
             },
             fornecedores: [],
             categorias: [],
@@ -315,19 +315,21 @@ export default {
           }
 
           let newData = Object.assign({}, data);
-          Object.keys(data).map(item => {
-            if (typeof(data[item]) == 'object') {
-              if (data[item].id) delete data[item].id
-              Object.keys(data[item]).map(o => {
-                if (typeof(data[item][o]) == 'object') delete data[item][o].id;
-              });
-            }
-          })
+          // Object.keys(data).map(item => {
+          //   if (typeof(data[item]) == 'object') {
+          //     if (data[item].id) delete data[item].id
+          //     Object.keys(data[item]).map(o => {
+          //       if (typeof(data[item][o]) == 'object') delete data[item][o].id;
+          //     });
+          //   }
+          // })
 
           axios.post(url, newData).then(response => {
               console.log(response);
               this.dialog = false;
               this.snackbar = { visible: true, message: "Produto cadastrado com sucesso!", timeout: 2500 };
+          }).then(() => {
+            this.$router.push("produtos").catch(err => console.log(err));
           })
         },
         

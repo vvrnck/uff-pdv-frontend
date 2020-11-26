@@ -52,13 +52,20 @@ export default {
         }
     },
     mounted() {
-        const url = getApiURL() + 'produto/all';
-        axios.get(url).then(response => {
-            const { data } = response;
-            this.produtos = data;
-        })
+        this.getAllProducts();
+    },
+     watch: {
+        // call again the method if the route changes
+        '$route': 'getAllProducts'
     },
     methods: {
+        getAllProducts() {
+            const url = getApiURL() + 'produto/all';
+            axios.get(url).then(response => {
+                const { data } = response;
+                this.produtos = data;
+            })
+        },
         close() {
             this.dialog = false;
         },
