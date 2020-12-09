@@ -31,5 +31,15 @@ yarn build or npm build
 yarn lint or npm lint
 ```
 
+## Testing the application (Product CRUD)
+
+- After project setup, run the folling commands:
+
+1. run the backend serve;
+2. use the command `yarn serve` or `npm serve` to run the frontend (the browser will be automatically open);
+3. click in 'Entrar' to login in the application;
+4. On the menu, go to 'Produtos' option.
+
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
