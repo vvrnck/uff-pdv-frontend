@@ -17,12 +17,11 @@
           <v-card elevation="3" class="pa-10 mt-10">
             <h3 class="mb-5">Grupo:</h3>
             <div style="display: grid; grid-auto-flow: row;">
-              <span>Gabriel Brandão</span>
-              <span>João</span>
-              <span>Lucas Rogério</span>
-              <span>Luisa</span>
-              <span>Renan</span>
-              <span>Rodrigo Werneck</span>
+              <span>Ana Luisa Esposito - 217083089</span>
+              <span>Gabriel Henrique Brandão Corrêa Silva - 119083069</span>
+              <span>José Emiliano Bertholdo Júnior - 217083125</span>
+              <span>Lucas Rogério Silva Ferreira - 217083103</span>              
+              <span>Rodrigo Werneck Nogueira de Medeiros - 216083099</span>
             </div>
           </v-card>
         </v-col>

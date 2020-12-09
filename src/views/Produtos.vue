@@ -60,7 +60,7 @@ export default {
     },
     methods: {
         getAllProducts() {
-            const url = getApiURL() + 'produto/all';
+            const url = getApiURL() + 'produto';
             axios.get(url).then(response => {
                 const { data } = response;
                 this.produtos = data;

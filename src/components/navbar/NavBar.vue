@@ -29,7 +29,9 @@
         >
             <v-list-item>
                 <v-list-item-avatar>
-                    <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+                     <v-avatar color="red">
+                        <span class="white--text headline">{{ user.nome.split("")[0] }}</span>
+                      </v-avatar>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -71,6 +73,7 @@ export default {
       return {
         drawer: false,
         itens: [
+          { icon: "mdi-home", label: "Home" },
           { icon: "mdi-store", label: "Produtos" },
           { icon: "mdi-shopping", label: "Vendas" },
           { icon: "mdi-truck", label: "Fornecedores" },
@@ -88,6 +91,7 @@ export default {
         },
         changeMenu(item) {
           if (item === "Produtos") return this.$router.push("produtos").catch(err => console.log(err));         
+          else if (item === "Home") return this.$router.push("home").catch(err => console.log(err));         
           else return this.$router.push("not_found").catch(err => console.log(err));
         }
     }
