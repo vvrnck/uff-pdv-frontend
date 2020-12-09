@@ -273,14 +273,14 @@ export default {
         }
     },
     mounted() {
-      const fornecedor_url = getApiURL() + 'fornecedor/all';
+      const fornecedor_url = getApiURL() + 'fornecedor';
       axios.get(fornecedor_url).then(response => {
         const { data } = response;
         this.fornecedores = data;
         this.fornecedoresItems = Array.from(data, f => f.razaoSocial); 
       });
 
-      const categoria_url = getApiURL() + 'categoria/all';
+      const categoria_url = getApiURL() + 'categoria';
       axios.get(categoria_url).then(response => {
         const { data } = response;
         this.categorias = data;
@@ -292,7 +292,7 @@ export default {
             this.fields[field] = e;
         },   
         save() {
-          const url = getApiURL() + '/produto/registrar';
+          const url = getApiURL() + 'produto';
           const { nome, preco, codigoBarras, urlImg, qtdEstoque, promocao, fornecedor, dates, porcentagem, categoria, descricao } = this.fields;
 
           const data = {
